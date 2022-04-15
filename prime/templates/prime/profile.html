@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+
+<div class="container">
+
+    <div class="tile is-ancestor">
+        <div class="tile is-4 is-vertical is-parent">
+            <div class="tile is-child box notification 
+                          has-background-dark has-text-success">
+
+                          <p class="title">Bio</p>
+                          <div class="box">
+                            <article class="media">
+                              <div class="media-left">
+                                  {% if profile.image %}
+                                <figure>
+                                  <img src="{{ profile.image.url }}" width="80">
+                                </figure>
+                                {% endif %}
+                              </div>
+                              <div class="media-content">
+                                <div class="content">
+                                  <p>
+                                    {{ profile.bio|slice:100 }}
+                                    <a class="read-more-btn" href="{{content.absolute_url}}">Read More</a>
+                                  </p>
+                                </div>
+                              </div>
+                            </article>
+                          </div>
+                          <hr>
+          
+                <p class="title">Personal Info</p>
+                <hr>
+                <p>
+                Email: <br>{{profile.email}}
+                 <hr>
+                Country: <br>{{profile.nationality}}
+                 <hr>
+                Location: <br>{{ profile.location }}
+                  <hr>
+                Contact: <br>{{profile.phone_number}}
+                  <hr>
+                Date of Birth: <br>{{profile.birth_date}}
+                 <hr>
+                Education: <br>{{profile.educational_stats}}
+                  <hr>
+                Profession: <br>{{profile.profesion}}
+                   <hr>
+                State of Origin: <br>{{profile.state}}
+                    <hr>
+                Local Govt.: <br>{{profile.local_govt}}
+                    <hr>
+                Gender: <br>{{profile.gender}}
+                    <hr>
+                </p>
+                <hr>
+              </div>
+
+              
+            <div class="tile is-child box notification  
+                         has-background-dark has-text-success">
+                         <p class="title">Contacts</p> <hr>
+                         <div class="block">
+                          <h3 class="title is-4">
+                              {{profile.user.username}} follows:<hr>
+                          </h3>
+                          <div class="content">
+                              <ul>
+                              {% for following in profile.follows.all %}
+                              <li>
+                                
+                                      <a href="{% url 'prime:profile' following.id %}">
+                                          {{ following }}
+                                      </a>
+                                  </li>
+                                  <hr>
+                              {% endfor %}
+                              </ul>
+                          </div>
+                         
+                      </div>
+                  
+                      <div class="block">
+                          <h3 class="title is-4">
+                              {{profile.user.username}} is followed by:<hr>
+                          </h3>
+                          <div class="content">
+                              <ul>
+                              {% for follower in profile.followed_by.all %}
+                                  <li>
+                                      <a href="{% url 'prime:profile' follower.id %}">
+                                          {{ follower }}
+                                      </a>
+                                  </li>
+                                  <hr>
+                              {% endfor %}
+                              </ul>
+                          </div>
+                      </div>
+
+
+            </div>
+        </div>
+
+        <div class="tile is-parent">
+            <div class="tile is-child box notification 
+                         has-background-dark has-text-success">
+                <div class="column">
+                    <div class="media">
+                        <div class="media-left">
+                          <figure>
+                            <img src="#" border-radius="%", width="250">
+                          </figure>
+                        </div>
+                    <div class="media-content">
+                    <p class="title is-4">
+                    <div class="block">
+                    <h1 class="title is-6">
+                        {{profile.first_name|upper}}
+                        {{profile.other_name|upper}}
+                        {{profile.last_name|upper}}
+                        <br><br>
+                        (@{{profile.user.username|lower}})
+                    </h1>
+                    </div>
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="buttons has-addons">
+                        {% if profile in user.profile.follows.all %}
+                            <button class="button is-success is-static">Follow</button>
+                            <button class="button is-danger" name="follow" value="unfollow">
+                                Unfollow
+                            </button>
+                        {% else %}
+                            <button class="button is-success" name="follow" value="follow">
+                                Follow
+                            </button>
+                            <button class="button is-danger is-static">Unfollow</button>
+                        {% endif %}
+
+                        </div>
+                    </form>
+                    </div> 
+                    </div>
+
+            <div class="content">
+                <hr>
+                {% for prime in profile.user.primes.all %}
+                <hr>
+                    <div class="box">
+                        <hr>
+                        {{ prime.body }}
+                <hr>
+                        <span class="is-small has-text-grey-light">
+                            ({{ prime.created_at }})
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            {% endblock content %}

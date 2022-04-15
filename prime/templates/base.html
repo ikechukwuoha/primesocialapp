@@ -1,0 +1,112 @@
+{% load bootstrap4 %}
+<!doctype html>
+    <html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1,
+        shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <!-- Include the Bulma CSS framework for styling -->
+        <link rel="stylesheet"  href=
+        "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+            <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js">
+        </script>
+        <title>Teaserfunapp</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+</head>
+
+<body>
+    
+<header>
+  <section>
+  <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary mb-4 border">
+    <h3 style="color: rgb(1, 1, 8);">Taserfunapp</h3>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+        </a></li>
+      </ul>
+          {% if user.is_authenticated %}
+              <ul>
+                <li>
+                  <a href="{% url 'prime:dashboard' %}">
+                    <i class="fa fa-home fa-fw" style="font-size:35px;color:greenyellow"></i>
+                  </a>
+                </li>
+              </ul>
+              
+              <ul>
+                  <li>
+                      <a href="{% url 'prime:notification' %}">
+                        <i class="fa fa-bell fa-fw" style="font-size:35px;color:greenyellow"></i>
+                      </a>
+                  </li>
+              </ul>
+              
+              <ul class="navbar-nav ml-auto "> 
+                <li class="nav-item">
+                <img src="ikechi.jpg">
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="{% url 'prime:profile' request.user.profile.id %}">{{ user.profile.first_name }}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            {% endif %}
+
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                <span class="navbar-text"}> <p>Hello, {{ user.profile.first_name }}
+                  {{ user.profile.other_name }}
+                  {{ user.profile.last_name }}.
+                  </p>
+                </span>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Sign out</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="#">Sign up</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Sign in</a></li>
+                {% endif %}
+                </ul>
+                </div>
+  </nav>
+  </section>
+</header>
+<hr>
+<hr>
+<hr>
+            
+
+
+
+                {% block content %}
+                
+                {% endblock content %}
+               
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+</body>
+</html>

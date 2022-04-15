@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+
+
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-success is-fullwidth is-medium mt-5"
+                type="submit">Post
+        </button>
+    </form>
+  </div>
+</div>
+<hr>
+<hr>
+{% for prime in primes %}
+<div class="tile is-parent">
+  <div class="tile is-child box notification 
+               has-background-dark has-text-success">
+<div class="columns is-centered">
+    <div class="column is-half">
+        <div class="block">
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-59x48">
+                          <img src="https://bulma.io/images/placeholders/96x96.png"
+                               alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">
+                          {{ profile.first_name }}
+                        </p>
+                        <p class="subtitle is-6">
+                          @{{ profile.user.username|lower }}
+                        </p>
+                    </div>
+            </div>
+        <hr>
+        <p>
+            {{prime.body}}
+        </p>
+        <p class="is-small has-text-grey-light">
+            ({{ prime.created_at }}) ( by {{ prime.user.username }})
+        </p>
+        <hr>
+        <hr>
+        <hr>
+        <hr>
+        <hr>
+        <hr>
+        <hr>
+       
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+
+{% endblock content %}
