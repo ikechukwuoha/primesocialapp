@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import PrimeForm
-from .models import Prime, Profile
-
+from users.models import Profile
+from prime.models import Prime
 
 
 # Create your views here.

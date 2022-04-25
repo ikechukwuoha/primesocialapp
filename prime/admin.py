@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from .models import Prime, Profile
+from prime.models import Prime
+from users.models import Profile
 
 # Register your models here.
 
